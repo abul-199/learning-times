@@ -1,0 +1,2173 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Web Belajar Menuju Kesuksesan</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+    :root {
+      --bg: #e9eef3;
+      --bg-2: #dde5ec;
+      --panel: #f3f6f9;
+      --panel-2: #eaf0f5;
+      --surface: #edf3f7;
+      --line: #cfd8e3;
+      --line-soft: #dbe3eb;
+      --text: #233041;
+      --muted: #607083;
+      --primary: #4e6fa5;
+      --primary-strong: #3e5f93;
+      --primary-soft: #dbe6f4;
+      --success: #3f7b63;
+      --success-soft: #d8ebe2;
+      --warning: #9a7446;
+      --warning-soft: #efe5d7;
+      --danger: #b35c5c;
+      --danger-soft: #f1dddd;
+      --shadow: 0 12px 28px rgba(30, 41, 59, 0.08);
+      --shadow-soft: 0 8px 18px rgba(30, 41, 59, 0.05);
+      --radius-xl: 24px;
+      --radius-lg: 18px;
+      --radius-md: 14px;
+      --radius-sm: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', 'Inter', 'Segoe UI', Arial, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(142, 168, 196, 0.18), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(122, 152, 180, 0.12), transparent 24%),
+        linear-gradient(180deg, var(--bg), var(--bg-2));
+      color: var(--text);
+      min-height: 100vh;
+      letter-spacing: 0.01em;
+    }
+
+    .app-shell {
+      width: min(1360px, 95%);
+      margin: 22px auto;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 18px;
+    }
+
+    .sidebar {
+      background: rgba(236, 241, 246, 0.9);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(207, 216, 227, 0.9);
+      box-shadow: var(--shadow);
+      border-radius: 28px;
+      padding: 22px 18px;
+      position: sticky;
+      top: 20px;
+      height: fit-content;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 22px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brand-badge {
+      width: 52px;
+      height: 52px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      font-size: 24px;
+      background: linear-gradient(135deg, var(--primary), #6f89b6);
+      color: #f8fbff;
+      box-shadow: 0 10px 18px rgba(78, 111, 165, 0.18);
+    }
+
+    .brand-text h1 {
+      font-size: 1.02rem;
+      line-height: 1.45;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+    }
+
+    .brand-text p {
+      margin-top: 4px;
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    .nav-label {
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin: 8px 8px 10px;
+      font-weight: 800;
+    }
+
+    .nav-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .nav-btn {
+      width: 100%;
+      border: none;
+      background: transparent;
+      padding: 12px 13px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      transition: 0.22s ease;
+      color: var(--text);
+      text-align: left;
+    }
+
+    .nav-btn:hover {
+      background: rgba(255, 255, 255, 0.28);
+      transform: translateX(2px);
+    }
+
+    .nav-btn.active {
+      background: linear-gradient(135deg, #d9e5f4, #e8eff8);
+      color: var(--primary-strong);
+      box-shadow: inset 0 0 0 1px #c3d2e7;
+    }
+
+    .nav-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      font-size: 18px;
+      background: #dde6f1;
+      flex-shrink: 0;
+    }
+
+    .nav-btn.active .nav-icon {
+      background: #cfddef;
+    }
+
+    .nav-title {
+      font-weight: 700;
+      display: block;
+      font-size: 0.96rem;
+    }
+
+    .nav-subtitle {
+      display: block;
+      font-size: 0.83rem;
+      color: var(--muted);
+      margin-top: 2px;
+      line-height: 1.45;
+    }
+
+    .sidebar-card {
+      margin-top: 18px;
+      padding: 16px;
+      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(245, 248, 251, 0.86), rgba(234, 239, 244, 0.9));
+      border: 1px solid var(--line);
+    }
+
+    .sidebar-card h3 {
+      font-size: 0.97rem;
+      margin-bottom: 8px;
+    }
+
+    .sidebar-card p {
+      font-size: 0.89rem;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    .main {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .topbar {
+      background: rgba(236, 241, 246, 0.88);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+      border-radius: 28px;
+      padding: 18px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      border: 1px solid rgba(207, 216, 227, 0.9);
+    }
+
+    .topbar-left h2 {
+      font-size: 1.34rem;
+      margin-bottom: 6px;
+      letter-spacing: 0.01em;
+    }
+
+    .topbar-left p {
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 0.94rem;
+    }
+
+    .topbar-right {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .clock-box,
+    .date-box,
+    .streak-box {
+      min-width: 170px;
+      background: rgba(243, 246, 249, 0.9);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-soft);
+      border-radius: 18px;
+      padding: 12px 14px;
+    }
+
+    .label-small {
+      display: block;
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 5px;
+      font-weight: 800;
+    }
+
+    .value-big {
+      font-size: 1.02rem;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+    }
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .page {
+      display: none;
+      animation: fadeIn 0.24s ease;
+      gap: 18px;
+    }
+
+    .page.active {
+      display: flex;
+      flex-direction: column;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(5px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-card {
+      background: linear-gradient(135deg, rgba(239, 243, 248, 0.96), rgba(229, 236, 243, 0.94));
+      border-radius: 28px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--line);
+      display: grid;
+      grid-template-columns: 1.2fr 0.9fr;
+      gap: 18px;
+    }
+
+    .hero-content h3 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      line-height: 1.45;
+      letter-spacing: 0.01em;
+    }
+
+    .hero-content p {
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 0.96rem;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .badge {
+      padding: 9px 13px;
+      border-radius: 999px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      border: 1px solid var(--line);
+      background: rgba(248, 250, 252, 0.7);
+      color: var(--text);
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      align-content: center;
+    }
+
+    .stat-card {
+      background: rgba(243, 246, 249, 0.92);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 15px;
+      min-height: 114px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .stat-card .stat-emoji {
+      font-size: 1.3rem;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .stat-card .stat-label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 6px;
+      display: block;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      line-height: 1.45;
+    }
+
+    .stat-card .stat-value {
+      font-size: 1.34rem;
+      font-weight: 800;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 18px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .card {
+      background: rgba(241, 245, 249, 0.94);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .card-title-wrap h3 {
+      font-size: 1.08rem;
+      margin-bottom: 5px;
+      letter-spacing: 0.01em;
+    }
+
+    .card-title-wrap p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(234, 240, 245, 0.95);
+      border: 1px solid var(--line);
+      font-size: 0.84rem;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .table-like {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .table-row {
+      display: grid;
+      grid-template-columns: 170px 1fr;
+      gap: 10px;
+      align-items: start;
+      padding: 14px;
+      border-radius: 18px;
+      background: rgba(234, 240, 245, 0.75);
+      border: 1px solid var(--line-soft);
+    }
+
+    .day-chip {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+    }
+
+    .day-chip span:first-child {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: var(--primary-soft);
+      color: var(--primary-strong);
+      flex-shrink: 0;
+    }
+
+    .session-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .session-tag {
+      padding: 8px 12px;
+      border-radius: 12px;
+      background: rgba(245, 248, 251, 0.9);
+      border: 1px solid var(--line);
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .session-tag.free {
+      background: #e4eaf0;
+      color: var(--muted);
+    }
+
+    .session-tag.active-now {
+      background: var(--success-soft);
+      color: var(--success);
+      border-color: #b8d7c8;
+      font-weight: 800;
+    }
+
+    .legend-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 0.92rem;
+    }
+
+    .legend-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 99px;
+      flex-shrink: 0;
+    }
+
+    .legend-dot.blue {
+      background: #9db4d3;
+    }
+
+    .legend-dot.green {
+      background: #9fc9b4;
+    }
+
+    .legend-dot.gray {
+      background: #b9c6d3;
+    }
+
+    .status-box {
+      padding: 18px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #e4edf6, #eef3f8);
+      border: 1px solid #ccd8e5;
+    }
+
+    .status-box h4 {
+      font-size: 1rem;
+      margin-bottom: 8px;
+      letter-spacing: 0.01em;
+    }
+
+    .status-box p {
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .highlight-line {
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: rgba(244, 247, 250, 0.95);
+      border: 1px dashed #bfd0e3;
+      font-weight: 700;
+      color: var(--primary-strong);
+      line-height: 1.7;
+    }
+
+    .dashboard-summary {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .mini-stat {
+      padding: 17px;
+      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(243, 246, 249, 0.96), rgba(233, 239, 245, 0.96));
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .mini-stat strong {
+      display: block;
+      font-size: 1.4rem;
+      margin: 8px 0 6px;
+      letter-spacing: 0.01em;
+    }
+
+    .mini-stat span {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.65;
+    }
+
+    .activity-list,
+    .materi-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-height: 520px;
+      overflow: auto;
+      padding-right: 4px;
+    }
+
+    .activity-item,
+    .materi-item {
+      border-radius: 20px;
+      padding: 16px;
+      background: linear-gradient(180deg, rgba(243, 246, 249, 0.96), rgba(234, 240, 245, 0.92));
+      border: 1px solid var(--line);
+    }
+
+    .item-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .item-title {
+      font-size: 0.98rem;
+      font-weight: 800;
+      line-height: 1.6;
+    }
+
+    .item-subtitle {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-top: 4px;
+    }
+
+    .mood-tag {
+      padding: 8px 11px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      background: #dbe6f4;
+      color: var(--primary-strong);
+      border: 1px solid #c2d0e3;
+      white-space: nowrap;
+    }
+
+    .item-message {
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: rgba(247, 249, 251, 0.96);
+      border: 1px dashed #c8d6e5;
+      color: #39506a;
+      line-height: 1.8;
+      font-weight: 600;
+    }
+
+    .empty-state {
+      padding: 28px 20px;
+      border-radius: 24px;
+      border: 1px dashed var(--line);
+      text-align: center;
+      background: linear-gradient(180deg, rgba(242, 246, 249, 0.95), rgba(234, 240, 245, 0.9));
+      color: var(--muted);
+      line-height: 1.85;
+    }
+
+    .empty-state .big-emoji {
+      font-size: 2rem;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 20px;
+    }
+
+    .textarea-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    label.form-label {
+      font-size: 0.9rem;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 320px;
+      resize: vertical;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      padding: 18px;
+      font-size: 0.97rem;
+      line-height: 1.85;
+      color: var(--text);
+      outline: none;
+      background: rgba(247, 249, 251, 0.92);
+      transition: border 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    textarea:focus {
+      border-color: #a9bfdc;
+      box-shadow: 0 0 0 4px rgba(94, 122, 160, 0.12);
+      background: #f7fafc;
+    }
+
+    .side-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .rating-card,
+    .meta-card,
+    .action-card {
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(243, 246, 249, 0.96), rgba(234, 240, 245, 0.92));
+      padding: 18px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .rating-card h4,
+    .meta-card h4,
+    .action-card h4 {
+      font-size: 1rem;
+      margin-bottom: 8px;
+    }
+
+    .rating-card p,
+    .meta-card p,
+    .action-card p {
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 0.92rem;
+    }
+
+    .slider-wrap {
+      margin-top: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--primary);
+      cursor: pointer;
+    }
+
+    .rating-preview {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: #dfe8f3;
+      border: 1px solid #c5d3e3;
+    }
+
+    .rating-preview strong {
+      font-size: 1.28rem;
+    }
+
+    .rating-meaning {
+      font-weight: 700;
+      color: var(--primary-strong);
+    }
+
+    .meta-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .meta-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: rgba(246, 249, 251, 0.95);
+      border: 1px solid var(--line);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .meta-item span:first-child {
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 16px;
+      padding: 13px 16px;
+      font-size: 0.94rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s ease;
+      font-family: inherit;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      filter: brightness(0.99);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), #6483b5);
+      color: #f8fbff;
+      box-shadow: 0 10px 18px rgba(78, 111, 165, 0.18);
+    }
+
+    .btn-secondary {
+      background: rgba(247, 249, 251, 0.96);
+      color: var(--text);
+      border: 1px solid var(--line);
+    }
+
+    .btn-danger {
+      background: var(--danger-soft);
+      color: var(--danger);
+      border: 1px solid #ddb9b9;
+    }
+
+    .tips-list {
+      margin-top: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .tip-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 11px 12px;
+      border-radius: 14px;
+      background: rgba(246, 249, 251, 0.95);
+      border: 1px solid var(--line);
+      line-height: 1.75;
+      color: var(--muted);
+      font-size: 0.91rem;
+    }
+
+    .tip-item span:first-child {
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .materi-content {
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: rgba(247, 249, 251, 0.96);
+      border: 1px solid var(--line-soft);
+      line-height: 1.9;
+      white-space: pre-wrap;
+      color: #33465b;
+      font-size: 0.94rem;
+    }
+
+    .item-footer {
+      margin-top: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chip {
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: #e7edf3;
+      border: 1px solid var(--line);
+      font-size: 0.82rem;
+      color: #4c6177;
+      font-weight: 700;
+    }
+
+    .difficulty-chip.easy {
+      background: var(--success-soft);
+      color: var(--success);
+      border-color: #b9d6c6;
+    }
+
+    .difficulty-chip.medium {
+      background: var(--warning-soft);
+      color: var(--warning);
+      border-color: #dcc9ad;
+    }
+
+    .difficulty-chip.hard {
+      background: #dbe6f4;
+      color: var(--primary-strong);
+      border-color: #c3d1e3;
+    }
+
+    .difficulty-chip.very-hard {
+      background: var(--danger-soft);
+      color: var(--danger);
+      border-color: #dfbcbc;
+    }
+
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .toolbar-left,
+    .toolbar-right {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .select,
+    .search-input {
+      border: 1px solid var(--line);
+      background: rgba(247, 249, 251, 0.96);
+      border-radius: 14px;
+      padding: 11px 12px;
+      font-size: 0.92rem;
+      color: var(--text);
+      outline: none;
+      font-family: inherit;
+    }
+
+    .search-input {
+      min-width: 260px;
+    }
+
+    .section-note {
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 0.92rem;
+      margin-top: 4px;
+    }
+
+    .toast {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      min-width: 260px;
+      max-width: 420px;
+      background: rgba(37, 48, 65, 0.95);
+      color: #f8fbff;
+      padding: 14px 16px;
+      border-radius: 18px;
+      box-shadow: 0 15px 28px rgba(30, 41, 59, 0.2);
+      transform: translateY(30px);
+      opacity: 0;
+      pointer-events: none;
+      transition: 0.22s ease;
+      z-index: 999;
+      line-height: 1.65;
+      font-size: 0.92rem;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(35, 48, 65, 0.42);
+      backdrop-filter: blur(5px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      z-index: 1000;
+    }
+
+    .modal-overlay.show {
+      display: flex;
+    }
+
+    .modal {
+      width: min(520px, 100%);
+      border-radius: 28px;
+      background: #eef3f7;
+      box-shadow: 0 24px 50px rgba(30, 41, 59, 0.22);
+      overflow: hidden;
+      border: 1px solid var(--line);
+      animation: popIn 0.22s ease;
+    }
+
+    @keyframes popIn {
+      from {
+        opacity: 0;
+        transform: scale(0.97);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .modal-top {
+      padding: 22px 24px 10px;
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .modal-icon {
+      width: 58px;
+      height: 58px;
+      border-radius: 20px;
+      display: grid;
+      place-items: center;
+      font-size: 26px;
+      background: var(--success-soft);
+      color: var(--success);
+      flex-shrink: 0;
+    }
+
+    .modal-title {
+      font-size: 1.18rem;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .modal-subtitle {
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 0.93rem;
+    }
+
+    .modal-body {
+      padding: 4px 24px 22px;
+    }
+
+    .modal-info {
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: 18px;
+      background: rgba(247, 249, 251, 0.95);
+      border: 1px solid var(--line);
+      line-height: 1.8;
+      color: #33465b;
+      font-size: 0.93rem;
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      flex-wrap: wrap;
+      padding: 0 24px 24px;
+    }
+
+    .footer-note {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.88rem;
+      padding: 8px 0 2px;
+      line-height: 1.7;
+    }
+
+    .progress-ring {
+      margin-top: 16px;
+      padding: 14px;
+      border-radius: 18px;
+      background: rgba(247, 249, 251, 0.95);
+      border: 1px solid var(--line);
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 0.88rem;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 12px;
+      background: #d7e0e8;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--primary), #7c97c0);
+      border-radius: 999px;
+      transition: 0.4s ease;
+    }
+
+    .small-muted {
+      color: var(--muted);
+      font-size: 0.85rem;
+      line-height: 1.65;
+    }
+
+    .quote-box {
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(245, 248, 251, 0.96), rgba(234, 240, 245, 0.92));
+      border: 1px dashed #c4d1de;
+      color: #3a4e64;
+      line-height: 1.9;
+      font-weight: 600;
+      font-size: 0.93rem;
+    }
+
+    @media (max-width: 1180px) {
+      .app-shell {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: relative;
+        top: 0;
+      }
+
+      .hero-card,
+      .grid-2,
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .dashboard-summary {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 760px) {
+      .topbar {
+        padding: 16px;
+      }
+
+      .card,
+      .hero-card {
+        padding: 16px;
+      }
+
+      .dashboard-summary,
+      .grid-3,
+      .hero-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .table-row {
+        grid-template-columns: 1fr;
+      }
+
+      .search-input {
+        min-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-badge">📘</div>
+        <div class="brand-text">
+          <h1>Web Belajar Menuju Kesuksesan</h1>
+          <p>Rapi, profesional, dan konsisten setiap hari.</p>
+        </div>
+      </div>
+
+      <div class="nav-label">Menu Utama</div>
+      <ul class="nav-list">
+        <li>
+          <button class="nav-btn active" data-page="times">
+            <div class="nav-icon">⏰</div>
+            <div>
+              <span class="nav-title">Times</span>
+              <span class="nav-subtitle">Jadwal belajar harian</span>
+            </div>
+          </button>
+        </li>
+        <li>
+          <button class="nav-btn" data-page="dashboard">
+            <div class="nav-icon">📊</div>
+            <div>
+              <span class="nav-title">Dashboard</span>
+              <span class="nav-subtitle">Riwayat belajar aktif</span>
+            </div>
+          </button>
+        </li>
+        <li>
+          <button class="nav-btn" data-page="canvas">
+            <div class="nav-icon">📝</div>
+            <div>
+              <span class="nav-title">Canvas</span>
+              <span class="nav-subtitle">Catatan materi hari ini</span>
+            </div>
+          </button>
+        </li>
+        <li>
+          <button class="nav-btn" data-page="materi">
+            <div class="nav-icon">📚</div>
+            <div>
+              <span class="nav-title">Materi</span>
+              <span class="nav-subtitle">Kumpulan materi tersimpan</span>
+            </div>
+          </button>
+        </li>
+      </ul>
+
+      <div class="sidebar-card">
+        <h3>Tujuan Web</h3>
+        <p>
+          Membantu user belajar lebih tertata. Saat masuk waktu belajar, sistem akan memunculkan
+          notifikasi <strong>“Waktu belajar dimulai!”</strong> lalu aktivitas akan masuk ke dashboard.
+        </p>
+      </div>
+
+      <div class="sidebar-card">
+        <h3>Nama User</h3>
+        <p><strong>Ashabul</strong> akan ditampilkan di dashboard sebagai motivasi belajar yang konsisten setiap hari.</p>
+      </div>
+    </aside>
+
+    <div class="main">
+      <header class="topbar">
+        <div class="topbar-left">
+          <h2 id="pageTitle">Times</h2>
+          <p id="pageDesc">Pantau jadwal belajar harian dengan tampilan yang bersih dan profesional.</p>
+        </div>
+        <div class="topbar-right">
+          <div class="date-box">
+            <span class="label-small">Hari Ini</span>
+            <div class="value-big" id="todayDate">-</div>
+          </div>
+          <div class="clock-box">
+            <span class="label-small">Jam Berjalan</span>
+            <div class="value-big" id="liveClock">00:00:00</div>
+          </div>
+          <div class="streak-box">
+            <span class="label-small">Belajar Tercatat</span>
+            <div class="value-big" id="topbarStudyCount">0 sesi</div>
+          </div>
+        </div>
+      </header>
+
+      <main class="content">
+        <section class="page active" id="page-times">
+          <div class="hero-card">
+            <div class="hero-content">
+              <h3>Belajar teratur, langkah kecil setiap hari, hasil besar di masa depan.</h3>
+              <p>
+                Di halaman ini, kamu bisa melihat jadwal belajar harian lengkap. Saat waktu belajar tiba,
+                website akan menampilkan jendela pemberitahuan agar sesi belajar langsung dimulai.
+                Setelah diklik, data otomatis masuk ke dashboard sebagai bukti konsistensi belajar.
+              </p>
+              <div class="hero-badges">
+                <div class="badge">⏱️ Jam berjalan real-time</div>
+                <div class="badge">✅ Popup sesi belajar otomatis</div>
+                <div class="badge">📊 Tercatat ke dashboard</div>
+              </div>
+              <div class="quote-box" id="studyMotivationQuote">
+                Konsistensi lebih kuat daripada semangat sesaat. Mulai dari jadwal yang kamu patuhi hari ini.
+              </div>
+            </div>
+            <div class="hero-stats">
+              <div class="stat-card">
+                <span class="stat-emoji">📅</span>
+                <span class="stat-label">Sesi Hari Ini</span>
+                <div class="stat-value" id="todaySessionCount">0</div>
+              </div>
+              <div class="stat-card">
+                <span class="stat-emoji">🎯</span>
+                <span class="stat-label">Status Saat Ini</span>
+                <div class="stat-value" id="liveSessionStatus">Menunggu</div>
+              </div>
+              <div class="stat-card">
+                <span class="stat-emoji">🔥</span>
+                <span class="stat-label">Hari Aktif</span>
+                <div class="stat-value" id="activeDaysCount">0</div>
+              </div>
+              <div class="stat-card">
+                <span class="stat-emoji">🧠</span>
+                <span class="stat-label">Materi Tersimpan</span>
+                <div class="stat-value" id="storedMateriCount">0</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title-wrap">
+                  <h3>Jadwal Belajar Mingguan</h3>
+                  <p>Susunan jadwal belajar setiap hari menuju kesuksesan.</p>
+                </div>
+                <div class="pill">📍 Zona waktu: WIB</div>
+              </div>
+              <div class="table-like" id="scheduleList"></div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title-wrap">
+                  <h3>Status Belajar Sekarang</h3>
+                  <p>Info langsung berdasarkan hari dan jam saat ini.</p>
+                </div>
+              </div>
+              <div class="status-box">
+                <h4 id="statusTitle">Belum masuk sesi belajar</h4>
+                <p id="statusDesc">Sistem akan mengecek jadwal secara berkala dan memunculkan popup saat waktunya mulai.</p>
+                <div class="highlight-line" id="statusHighlight">Tidak ada sesi belajar aktif pada menit ini.</div>
+              </div>
+
+              <div class="progress-ring">
+                <div class="progress-header">
+                  <span>Progress kepatuhan jadwal hari ini</span>
+                  <span id="dailyProgressText">0%</span>
+                </div>
+                <div class="progress-bar">
+                  <div class="progress-fill" id="dailyProgressFill"></div>
+                </div>
+              </div>
+
+              <div class="legend-list">
+                <div class="legend-item">
+                  <div class="legend-dot blue"></div>
+                  <div>Tag biru menandakan sesi belajar biasa.</div>
+                </div>
+                <div class="legend-item">
+                  <div class="legend-dot green"></div>
+                  <div>Tag hijau menandakan sesi yang sedang aktif sekarang.</div>
+                </div>
+                <div class="legend-item">
+                  <div class="legend-dot gray"></div>
+                  <div>Tag abu-abu berarti slot <strong>Free</strong> dan tidak memunculkan popup.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="page" id="page-dashboard">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title-wrap">
+                <h3>Dashboard Aktivitas Belajar</h3>
+                <p>Menampilkan hari, tanggal, jam, dan kalimat motivasi yang berganti agar user tetap semangat.</p>
+              </div>
+              <div class="pill">✨ Profesional & tidak norak</div>
+            </div>
+
+            <div class="dashboard-summary">
+              <div class="mini-stat">
+                <div>📌 Total Aktivitas</div>
+                <strong id="dashTotalActivities">0</strong>
+                <span>Jumlah sesi belajar yang sudah tercatat.</span>
+              </div>
+              <div class="mini-stat">
+                <div>🗓️ Hari Aktif</div>
+                <strong id="dashActiveDays">0</strong>
+                <span>Total hari berbeda yang memiliki aktivitas belajar.</span>
+              </div>
+              <div class="mini-stat">
+                <div>📝 Total Materi</div>
+                <strong id="dashTotalMateri">0</strong>
+                <span>Jumlah catatan materi yang berhasil disimpan.</span>
+              </div>
+              <div class="mini-stat">
+                <div>⭐ Rata-rata Rating</div>
+                <strong id="dashAverageRating">0.0</strong>
+                <span>Nilai rata-rata kenyamanan materi yang dipelajari.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title-wrap">
+                  <h3>Riwayat Sesi Belajar</h3>
+                  <p>Setiap kali popup dikonfirmasi, data masuk ke sini.</p>
+                </div>
+                <div class="pill">🔄 Real-time via localStorage</div>
+              </div>
+              <div class="activity-list" id="activityList"></div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title-wrap">
+                  <h3>Ringkasan Motivasi</h3>
+                  <p>Kalimat berubah agar suasana belajar terasa lebih hidup dan semangat.</p>
+                </div>
+              </div>
+
+              <div class="tips-list" id="motivationTipsBox"></div>
+
+              <div class="quote-box" id="mainMotivationBox">
+                🌟 Ashabul berhasil belajar konsisten. Terus pertahankan ritme baik ini.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="page" id="page-canvas">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title-wrap">
+                <h3>Canvas Catatan Materi</h3>
+                <p>Tuliskan materi yang dipelajari hari ini, lalu beri rating seberapa enak dipahami.</p>
+              </div>
+              <div class="pill">📝 Data akan pindah ke menu Materi</div>
+            </div>
+
+            <div class="form-grid">
+              <div class="textarea-wrap">
+                <label class="form-label" for="materiInput">Materi yang dibahas hari ini</label>
+                <textarea id="materiInput" placeholder="Contoh:
+Hari ini saya belajar makro ekonomi bagian efektivitas devaluasi, memahami hubungan kurs, ekspor-impor, dan kondisi mobilitas modal rendah dan tinggi."></textarea>
+              </div>
+
+              <div class="side-panel">
+                <div class="rating-card">
+                  <h4>Rating Materi</h4>
+                  <p>Nilai seberapa enak atau nyaman materi dipelajari hari ini. Skala 1 sampai 5.</p>
+                  <div class="slider-wrap">
+                    <input type="range" id="ratingInput" min="1" max="5" value="3" />
+                    <div class="rating-preview">
+                      <div>
+                        <div class="small-muted">Nilai Saat Ini</div>
+                        <strong id="ratingValue">3</strong>
+                      </div>
+                      <div class="rating-meaning" id="ratingMeaning">Cukup nyaman</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="meta-card">
+                  <h4>Informasi Simpan</h4>
+                  <p>Data yang akan tersimpan secara otomatis mengikuti waktu sekarang.</p>
+                  <div class="meta-list">
+                    <div class="meta-item">
+                      <span>Hari</span>
+                      <span id="metaDay">-</span>
+                    </div>
+                    <div class="meta-item">
+                      <span>Tanggal</span>
+                      <span id="metaDate">-</span>
+                    </div>
+                    <div class="meta-item">
+                      <span>Jam</span>
+                      <span id="metaTime">-</span>
+                    </div>
+                    <div class="meta-item">
+                      <span>Nama User</span>
+                      <span>Ashabul</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="action-card">
+                  <h4>Aksi</h4>
+                  <p>Gunakan tombol berikut untuk menyimpan atau mengosongkan canvas.</p>
+                  <div class="actions">
+                    <button class="btn btn-primary" id="saveMateriBtn">Simpan ke Materi</button>
+                    <button class="btn btn-secondary" id="clearCanvasBtn">Kosongkan Canvas</button>
+                    <button class="btn btn-danger" id="clearAllDataBtn">Hapus Semua Data</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="page" id="page-materi">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title-wrap">
+                <h3>Materi Tersimpan</h3>
+                <p>Berisi hari, tanggal, jam, isi materi dari canvas, serta rating kesulitan/kenyamanan materi.</p>
+              </div>
+              <div class="pill">📚 Arsip materi belajar</div>
+            </div>
+
+            <div class="toolbar">
+              <div class="toolbar-left">
+                <input type="text" class="search-input" id="materiSearchInput" placeholder="Cari isi materi..." />
+              </div>
+              <div class="toolbar-right">
+                <select class="select" id="materiFilterSelect">
+                  <option value="all">Semua Rating</option>
+                  <option value="1">Rating 1</option>
+                  <option value="2">Rating 2</option>
+                  <option value="3">Rating 3</option>
+                  <option value="4">Rating 4</option>
+                  <option value="5">Rating 5</option>
+                </select>
+              </div>
+            </div>
+
+            <p class="section-note">
+              Semakin lengkap isi canvas dan semakin sering disimpan, semakin kaya riwayat materi belajarmu.
+            </p>
+
+            <div class="materi-list" id="materiList"></div>
+          </div>
+        </section>
+
+        <div class="footer-note">
+          Dibuat dalam satu file HTML yang sudah menggabungkan HTML, CSS, dan JavaScript.
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="studyModalOverlay">
+    <div class="modal">
+      <div class="modal-top">
+        <div class="modal-icon">📚</div>
+        <div>
+          <div class="modal-title">Waktu belajar dimulai!</div>
+          <div class="modal-subtitle">Klik tombol di bawah untuk memulai sesi belajar. Aktivitas akan langsung masuk ke dashboard.</div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="modal-info" id="modalInfoText">
+          Hari ini ada sesi belajar aktif. Yuk mulai belajar dengan fokus dan konsisten.
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" id="closeStudyModalBtn">Nanti</button>
+        <button class="btn btn-primary" id="confirmStudyBtn">Oke, Mulai Belajar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const USER_NAME = 'Ashabul';
+
+    const scheduleData = {
+      'Senin': ['10:00', '12:00', '21:00'],
+      'Selasa': ['10:00', '12:00', '21:00'],
+      'Rabu': ['10:00', '12:00', '21:00'],
+      'Kamis': ['10:00', '12:00', '21:00'],
+      'Jumat': ['10:00', '14:20', '21:00'],
+      'Sabtu': ['10:00', '13:00', 'Free'],
+      'Minggu': ['10:00', 'Free', '21:00']
+    };
+
+    const dayIconMap = {
+      'Senin': 'M',
+      'Selasa': 'S',
+      'Rabu': 'R',
+      'Kamis': 'K',
+      'Jumat': 'J',
+      'Sabtu': 'S',
+      'Minggu': 'M'
+    };
+
+    const pageInfo = {
+      times: {
+        title: 'Times',
+        desc: 'Pantau jadwal belajar harian dengan tampilan yang bersih dan profesional.'
+      },
+      dashboard: {
+        title: 'Dashboard',
+        desc: 'Lihat aktivitas belajar, ringkasan progres, dan motivasi agar konsisten.'
+      },
+      canvas: {
+        title: 'Canvas',
+        desc: 'Tulis materi yang dipelajari hari ini lalu simpan langsung ke menu materi.'
+      },
+      materi: {
+        title: 'Materi',
+        desc: 'Semua materi yang disimpan dari canvas akan tersusun rapi di halaman ini.'
+      }
+    };
+
+    const dailyMessages = [
+      '🚀 Ashabul berhasil belajar konsisten hari ini. Satu langkah kecil tetap membawa hasil besar.',
+      '🔥 Hebat! Ashabul menjaga ritme belajar dengan disiplin dan fokus.',
+      '📚 Konsistensi Ashabul hari ini menunjukkan proses menuju kesuksesan sedang berjalan.',
+      '✨ Luar biasa! Belajar hari ini menambah bekal kuat untuk masa depan.',
+      '🎯 Ashabul berhasil menjaga komitmen belajar. Pertahankan kebiasaan baik ini.',
+      '🌟 Sesi belajar hari ini berhasil dicatat. Konsistensi seperti ini sangat bernilai.',
+      '💡 Hari ini Ashabul kembali membuktikan bahwa disiplin lebih kuat dari rasa malas.'
+    ];
+
+    const motivationTips = [
+      '🌱 Belajar sedikit tapi rutin jauh lebih baik daripada banyak tapi jarang.',
+      '⏳ Gunakan jadwal sebagai pengingat, bukan tekanan. Yang penting terus bergerak.',
+      '🧠 Catat materi setelah belajar agar ingatan lebih kuat dan terstruktur.',
+      '🔥 Saat semangat turun, tetap hadir sesuai jadwal. Konsistensi membentuk hasil.',
+      '🎯 Fokus pada proses harian. Hasil besar biasanya datang dari langkah yang stabil.'
+    ];
+
+    const quoteRotation = [
+      'Konsistensi lebih kuat daripada semangat sesaat. Mulai dari jadwal yang kamu patuhi hari ini.',
+      'Jadwal yang tertata akan membuat belajar terasa lebih ringan dan lebih jelas arahnya.',
+      'Setiap sesi belajar yang kamu jalani hari ini adalah investasi untuk masa depan.',
+      'Tidak harus sempurna setiap hari, yang penting tetap hadir dan terus belajar.',
+      'Sukses sering lahir dari kebiasaan kecil yang diulang dengan disiplin.'
+    ];
+
+    const navButtons = document.querySelectorAll('.nav-btn');
+    const pages = document.querySelectorAll('.page');
+    const pageTitle = document.getElementById('pageTitle');
+    const pageDesc = document.getElementById('pageDesc');
+
+    const todayDateEl = document.getElementById('todayDate');
+    const liveClockEl = document.getElementById('liveClock');
+    const topbarStudyCountEl = document.getElementById('topbarStudyCount');
+
+    const scheduleListEl = document.getElementById('scheduleList');
+    const statusTitleEl = document.getElementById('statusTitle');
+    const statusDescEl = document.getElementById('statusDesc');
+    const statusHighlightEl = document.getElementById('statusHighlight');
+    const todaySessionCountEl = document.getElementById('todaySessionCount');
+    const liveSessionStatusEl = document.getElementById('liveSessionStatus');
+    const activeDaysCountEl = document.getElementById('activeDaysCount');
+    const storedMateriCountEl = document.getElementById('storedMateriCount');
+    const studyMotivationQuoteEl = document.getElementById('studyMotivationQuote');
+    const dailyProgressFillEl = document.getElementById('dailyProgressFill');
+    const dailyProgressTextEl = document.getElementById('dailyProgressText');
+
+    const activityListEl = document.getElementById('activityList');
+    const dashTotalActivitiesEl = document.getElementById('dashTotalActivities');
+    const dashActiveDaysEl = document.getElementById('dashActiveDays');
+    const dashTotalMateriEl = document.getElementById('dashTotalMateri');
+    const dashAverageRatingEl = document.getElementById('dashAverageRating');
+    const motivationTipsBoxEl = document.getElementById('motivationTipsBox');
+    const mainMotivationBoxEl = document.getElementById('mainMotivationBox');
+
+    const materiInputEl = document.getElementById('materiInput');
+    const ratingInputEl = document.getElementById('ratingInput');
+    const ratingValueEl = document.getElementById('ratingValue');
+    const ratingMeaningEl = document.getElementById('ratingMeaning');
+    const metaDayEl = document.getElementById('metaDay');
+    const metaDateEl = document.getElementById('metaDate');
+    const metaTimeEl = document.getElementById('metaTime');
+    const saveMateriBtn = document.getElementById('saveMateriBtn');
+    const clearCanvasBtn = document.getElementById('clearCanvasBtn');
+    const clearAllDataBtn = document.getElementById('clearAllDataBtn');
+
+    const materiListEl = document.getElementById('materiList');
+    const materiSearchInputEl = document.getElementById('materiSearchInput');
+    const materiFilterSelectEl = document.getElementById('materiFilterSelect');
+
+    const studyModalOverlayEl = document.getElementById('studyModalOverlay');
+    const modalInfoTextEl = document.getElementById('modalInfoText');
+    const closeStudyModalBtn = document.getElementById('closeStudyModalBtn');
+    const confirmStudyBtn = document.getElementById('confirmStudyBtn');
+
+    const toastEl = document.getElementById('toast');
+
+    let pendingStudyPayload = null;
+    let quoteIndex = 0;
+
+    function setPage(pageName) {
+      navButtons.forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.page === pageName);
+      });
+
+      pages.forEach(page => {
+        page.classList.toggle('active', page.id === `page-${pageName}`);
+      });
+
+      pageTitle.textContent = pageInfo[pageName].title;
+      pageDesc.textContent = pageInfo[pageName].desc;
+    }
+
+    navButtons.forEach(btn => {
+      btn.addEventListener('click', () => setPage(btn.dataset.page));
+    });
+
+    function showToast(message) {
+      toastEl.textContent = message;
+      toastEl.classList.add('show');
+      clearTimeout(showToast.timeoutId);
+      showToast.timeoutId = setTimeout(() => {
+        toastEl.classList.remove('show');
+      }, 2600);
+    }
+
+    function getStorage(key, fallback = []) {
+      try {
+        const raw = localStorage.getItem(key);
+        return raw ? JSON.parse(raw) : fallback;
+      } catch (error) {
+        return fallback;
+      }
+    }
+
+    function setStorage(key, value) {
+      localStorage.setItem(key, JSON.stringify(value));
+    }
+
+    function getActivities() {
+      return getStorage('studyActivities', []);
+    }
+
+    function setActivities(data) {
+      setStorage('studyActivities', data);
+    }
+
+    function getMateriData() {
+      return getStorage('materiData', []);
+    }
+
+    function setMateriData(data) {
+      setStorage('materiData', data);
+    }
+
+    function formatDate(dateObj) {
+      return new Intl.DateTimeFormat('id-ID', {
+        day: '2-digit',
+        month: 'long',
+        year: 'numeric'
+      }).format(dateObj);
+    }
+
+    function formatDay(dateObj) {
+      return new Intl.DateTimeFormat('id-ID', {
+        weekday: 'long'
+      }).format(dateObj);
+    }
+
+    function formatTime(dateObj) {
+      return new Intl.DateTimeFormat('id-ID', {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+      }).format(dateObj).replace(/\./g, ':');
+    }
+
+    function formatTimeShort(dateObj) {
+      return `${String(dateObj.getHours()).padStart(2, '0')}:${String(dateObj.getMinutes()).padStart(2, '0')}`;
+    }
+
+    function getMessageForIndex(index) {
+      return dailyMessages[index % dailyMessages.length];
+    }
+
+    function getRatingMeaning(value) {
+      const rating = Number(value);
+      if (rating === 1) return 'Sangat sulit';
+      if (rating === 2) return 'Cukup sulit';
+      if (rating === 3) return 'Cukup nyaman';
+      if (rating === 4) return 'Nyaman dipelajari';
+      return 'Sangat nyaman';
+    }
+
+    function getDifficultyClass(value) {
+      const rating = Number(value);
+      if (rating <= 1) return 'very-hard';
+      if (rating === 2) return 'hard';
+      if (rating === 3) return 'medium';
+      if (rating >= 4) return 'easy';
+      return 'medium';
+    }
+
+    function getTodayKey() {
+      const now = new Date();
+      return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+    }
+
+    function updateClockAndDate() {
+      const now = new Date();
+      todayDateEl.textContent = `${formatDay(now)}, ${formatDate(now)}`;
+      liveClockEl.textContent = formatTime(now);
+      metaDayEl.textContent = formatDay(now);
+      metaDateEl.textContent = formatDate(now);
+      metaTimeEl.textContent = formatTime(now);
+    }
+
+    function renderSchedule() {
+      const now = new Date();
+      const currentDay = formatDay(now);
+      const currentTime = formatTimeShort(now);
+
+      scheduleListEl.innerHTML = '';
+
+      Object.entries(scheduleData).forEach(([day, sessions]) => {
+        const row = document.createElement('div');
+        row.className = 'table-row';
+
+        const left = document.createElement('div');
+        left.className = 'day-chip';
+        left.innerHTML = `
+          <span>${dayIconMap[day] || '•'}</span>
+          <div>
+            <div>${day}</div>
+            <div class="small-muted">3 slot jadwal</div>
+          </div>
+        `;
+
+        const right = document.createElement('div');
+        right.className = 'session-list';
+
+        sessions.forEach(session => {
+          const tag = document.createElement('div');
+          tag.className = 'session-tag';
+          tag.textContent = session === 'Free' ? 'Free' : `${session} WIB`;
+
+          if (session === 'Free') {
+            tag.classList.add('free');
+          }
+
+          if (day === currentDay && session === currentTime) {
+            tag.classList.add('active-now');
+          }
+
+          right.appendChild(tag);
+        });
+
+        row.appendChild(left);
+        row.appendChild(right);
+        scheduleListEl.appendChild(row);
+      });
+    }
+
+    function getTodayStudySessions() {
+      const todayName = formatDay(new Date());
+      return (scheduleData[todayName] || []).filter(item => item !== 'Free');
+    }
+
+    function getTodayActivitiesCount() {
+      const activities = getActivities();
+      const todayKey = getTodayKey();
+      return activities.filter(item => item.dateKey === todayKey).length;
+    }
+
+    function updateTopCounts() {
+      const activities = getActivities();
+      const materi = getMateriData();
+      const uniqueDays = new Set(activities.map(item => item.dateKey));
+
+      topbarStudyCountEl.textContent = `${activities.length} sesi`;
+      todaySessionCountEl.textContent = getTodayStudySessions().length;
+      activeDaysCountEl.textContent = uniqueDays.size;
+      storedMateriCountEl.textContent = materi.length;
+    }
+
+    function updateLiveStudyStatus() {
+      const now = new Date();
+      const todayName = formatDay(now);
+      const currentTime = formatTimeShort(now);
+      const sessions = scheduleData[todayName] || [];
+
+      const isActive = sessions.includes(currentTime);
+      const todayActivities = getTodayActivitiesCount();
+      const totalTodaySessions = getTodayStudySessions().length;
+      const progress = totalTodaySessions === 0 ? 0 : Math.min(100, Math.round((todayActivities / totalTodaySessions) * 100));
+
+      if (isActive) {
+        liveSessionStatusEl.textContent = 'Aktif';
+        statusTitleEl.textContent = 'Sekarang masuk sesi belajar';
+        statusDescEl.textContent = `Hari ini adalah ${todayName}. Waktu ${currentTime} termasuk ke dalam jadwal belajar aktif.`;
+        statusHighlightEl.textContent = `Sesi belajar aktif sekarang: ${todayName}, pukul ${currentTime} WIB.`;
+      } else {
+        liveSessionStatusEl.textContent = 'Menunggu';
+        statusTitleEl.textContent = 'Belum masuk sesi belajar';
+        statusDescEl.textContent = `Belum ada jadwal aktif pada menit ini. Tetap siap saat waktu belajar berikutnya tiba.`;
+        statusHighlightEl.textContent = 'Tidak ada sesi belajar aktif pada menit ini.';
+      }
+
+      dailyProgressFillEl.style.width = `${progress}%`;
+      dailyProgressTextEl.textContent = `${progress}%`;
+    }
+
+    function rotateQuote() {
+      studyMotivationQuoteEl.textContent = quoteRotation[quoteIndex % quoteRotation.length];
+      quoteIndex += 1;
+    }
+
+    function renderMotivationTips() {
+      motivationTipsBoxEl.innerHTML = '';
+      motivationTips.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'tip-item';
+        div.innerHTML = `<span>•</span><div>${item}</div>`;
+        motivationTipsBoxEl.appendChild(div);
+      });
+    }
+
+    function renderDashboard() {
+      const activities = getActivities().slice().reverse();
+      const materi = getMateriData();
+      const uniqueDays = new Set(activities.map(item => item.dateKey));
+      const averageRating = materi.length ? (materi.reduce((sum, item) => sum + Number(item.rating), 0) / materi.length).toFixed(1) : '0.0';
+
+      dashTotalActivitiesEl.textContent = activities.length;
+      dashActiveDaysEl.textContent = uniqueDays.size;
+      dashTotalMateriEl.textContent = materi.length;
+      dashAverageRatingEl.textContent = averageRating;
+
+      mainMotivationBoxEl.textContent = activities.length
+        ? getMessageForIndex(activities.length - 1)
+        : '🌟 Belum ada sesi belajar tercatat. Saat waktunya tiba dan kamu klik mulai, riwayat akan tampil di sini.';
+
+      if (!activities.length) {
+        activityListEl.innerHTML = `
+          <div class="empty-state">
+            <span class="big-emoji">🗂️</span>
+            Belum ada sesi belajar yang tercatat.<br />
+            Saat popup waktu belajar muncul lalu kamu klik <strong>Oke, Mulai Belajar</strong>, data akan tampil di dashboard ini.
+          </div>
+        `;
+        return;
+      }
+
+      activityListEl.innerHTML = '';
+      activities.forEach((item, index) => {
+        const div = document.createElement('div');
+        div.className = 'activity-item';
+        div.innerHTML = `
+          <div class="item-top">
+            <div>
+              <div class="item-title">${item.day}, ${item.date} • ${item.time} WIB</div>
+              <div class="item-subtitle">Aktivitas belajar berhasil dicatat oleh sistem.</div>
+            </div>
+            <div class="mood-tag">Sesi #${activities.length - index}</div>
+          </div>
+          <div class="item-message">${item.message}</div>
+        `;
+        activityListEl.appendChild(div);
+      });
+    }
+
+    function renderMateri() {
+      const allMateri = getMateriData().slice().reverse();
+      const keyword = materiSearchInputEl.value.trim().toLowerCase();
+      const ratingFilter = materiFilterSelectEl.value;
+
+      const filtered = allMateri.filter(item => {
+        const matchText = !keyword || item.content.toLowerCase().includes(keyword);
+        const matchRating = ratingFilter === 'all' || String(item.rating) === ratingFilter;
+        return matchText && matchRating;
+      });
+
+      if (!filtered.length) {
+        materiListEl.innerHTML = `
+          <div class="empty-state">
+            <span class="big-emoji">📚</span>
+            Belum ada materi yang sesuai filter.<br />
+            Coba simpan catatan dari Canvas atau ubah kata pencarian.
+          </div>
+        `;
+        return;
+      }
+
+      materiListEl.innerHTML = '';
+      filtered.forEach((item, index) => {
+        const div = document.createElement('div');
+        const difficultyClass = getDifficultyClass(item.rating);
+        div.className = 'materi-item';
+        div.innerHTML = `
+          <div class="item-top">
+            <div>
+              <div class="item-title">${item.day}, ${item.date} • ${item.time} WIB</div>
+              <div class="item-subtitle">Catatan materi ke-${filtered.length - index}</div>
+            </div>
+            <div class="mood-tag">Rating ${item.rating}/5</div>
+          </div>
+          <div class="materi-content">${escapeHtml(item.content)}</div>
+          <div class="item-footer">
+            <div class="chip">👤 ${USER_NAME}</div>
+            <div class="chip">📝 Materi tersimpan</div>
+            <div class="chip difficulty-chip ${difficultyClass}">${getRatingMeaning(item.rating)}</div>
+          </div>
+        `;
+        materiListEl.appendChild(div);
+      });
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    function updateRatingPreview() {
+      const value = Number(ratingInputEl.value);
+      ratingValueEl.textContent = value;
+      ratingMeaningEl.textContent = getRatingMeaning(value);
+    }
+
+    function saveMateriFromCanvas() {
+      const content = materiInputEl.value.trim();
+      if (!content) {
+        showToast('Tulis materi dulu sebelum disimpan.');
+        return;
+      }
+
+      const now = new Date();
+      const payload = {
+        id: Date.now(),
+        user: USER_NAME,
+        day: formatDay(now),
+        date: formatDate(now),
+        time: formatTime(now).slice(0, 5),
+        dateKey: `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`,
+        rating: Number(ratingInputEl.value),
+        content
+      };
+
+      const materi = getMateriData();
+      materi.push(payload);
+      setMateriData(materi);
+
+      materiInputEl.value = '';
+      ratingInputEl.value = 3;
+      updateRatingPreview();
+      updateTopCounts();
+      renderDashboard();
+      renderMateri();
+      showToast('Materi berhasil disimpan dan masuk ke menu Materi.');
+      setPage('materi');
+    }
+
+    function clearCanvas() {
+      materiInputEl.value = '';
+      ratingInputEl.value = 3;
+      updateRatingPreview();
+      showToast('Canvas berhasil dikosongkan.');
+    }
+
+    function clearAllData() {
+      const confirmDelete = confirm('Yakin ingin menghapus semua data dashboard dan materi?');
+      if (!confirmDelete) return;
+
+      localStorage.removeItem('studyActivities');
+      localStorage.removeItem('materiData');
+      localStorage.removeItem('studyPopupLog');
+
+      renderAll();
+      showToast('Semua data berhasil dihapus.');
+    }
+
+    function addStudyActivity(payload) {
+      const activities = getActivities();
+      activities.push(payload);
+      setActivities(activities);
+      updateTopCounts();
+      updateLiveStudyStatus();
+      renderDashboard();
+    }
+
+    function openStudyModal(payload) {
+      pendingStudyPayload = payload;
+      modalInfoTextEl.innerHTML = `
+        Hari: <strong>${payload.day}</strong><br />
+        Tanggal: <strong>${payload.date}</strong><br />
+        Jam: <strong>${payload.time} WIB</strong><br /><br />
+        Klik <strong>Oke, Mulai Belajar</strong> agar sesi belajar tercatat ke dashboard.
+      `;
+      studyModalOverlayEl.classList.add('show');
+    }
+
+    function closeStudyModal() {
+      studyModalOverlayEl.classList.remove('show');
+    }
+
+    function confirmStudySession() {
+      if (!pendingStudyPayload) return;
+      addStudyActivity(pendingStudyPayload);
+      savePopupLog(pendingStudyPayload.popupKey);
+      showToast('Sesi belajar dimulai dan berhasil masuk ke dashboard.');
+      pendingStudyPayload = null;
+      closeStudyModal();
+      renderAll();
+    }
+
+    function getPopupLog() {
+      return getStorage('studyPopupLog', []);
+    }
+
+    function savePopupLog(key) {
+      const logs = getPopupLog();
+      if (!logs.includes(key)) {
+        logs.push(key);
+        setStorage('studyPopupLog', logs);
+      }
+    }
+
+    function hasPopupBeenShown(key) {
+      return getPopupLog().includes(key);
+    }
+
+    function checkStudyTime() {
+      const now = new Date();
+      const day = formatDay(now);
+      const date = formatDate(now);
+      const time = formatTimeShort(now);
+      const sessions = scheduleData[day] || [];
+
+      if (!sessions.includes(time)) return;
+      if (time === 'Free') return;
+
+      const popupKey = `${getTodayKey()}_${day}_${time}`;
+      if (hasPopupBeenShown(popupKey)) return;
+      if (studyModalOverlayEl.classList.contains('show')) return;
+
+      const activities = getActivities();
+      const message = getMessageForIndex(activities.length);
+
+      openStudyModal({
+        id: Date.now(),
+        user: USER_NAME,
+        day,
+        date,
+        time,
+        dateKey: getTodayKey(),
+        message,
+        popupKey
+      });
+    }
+
+    function renderAll() {
+      updateClockAndDate();
+      renderSchedule();
+      updateTopCounts();
+      updateLiveStudyStatus();
+      renderDashboard();
+      renderMateri();
+      renderMotivationTips();
+    }
+
+    ratingInputEl.addEventListener('input', updateRatingPreview);
+    saveMateriBtn.addEventListener('click', saveMateriFromCanvas);
+    clearCanvasBtn.addEventListener('click', clearCanvas);
+    clearAllDataBtn.addEventListener('click', clearAllData);
+    closeStudyModalBtn.addEventListener('click', closeStudyModal);
+    confirmStudyBtn.addEventListener('click', confirmStudySession);
+    materiSearchInputEl.addEventListener('input', renderMateri);
+    materiFilterSelectEl.addEventListener('change', renderMateri);
+
+    window.addEventListener('click', (event) => {
+      if (event.target === studyModalOverlayEl) {
+        closeStudyModal();
+      }
+    });
+
+    setInterval(() => {
+      updateClockAndDate();
+      renderSchedule();
+      updateLiveStudyStatus();
+      checkStudyTime();
+    }, 1000);
+
+    setInterval(() => {
+      rotateQuote();
+    }, 9000);
+
+    updateRatingPreview();
+    renderAll();
+    rotateQuote();
+    checkStudyTime();
+  </script>
+</body>
+</html>
